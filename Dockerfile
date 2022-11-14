@@ -33,4 +33,4 @@ RUN mvn package
 
 FROM tomcat:9.0.68
 #RUN rm -rf /usr/local/tomcat/webapps/ROOT
-COPY --from=build-env /app/target/dependency/*.war /usr/local/tomcat/webapps/ROOT.war
+COPY --from=build-env /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
