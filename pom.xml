@@ -1,66 +1,56 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.microsoft</groupId>
-	<artifactId>ROOT</artifactId>
-	<version>1.0</version>
-	<packaging>war</packaging>
-	<name>Sample JSF App</name>
-	<repositories>
-       <repository>
-          <id>central</id>
-          <name>Central</name>
-          <url>https://repo1.maven.org/maven2</url>
-       </repository>
-    </repositories>
-	
-<!-- JSF Dependency -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>java-tomcat-maven-example</artifactId>
+  <packaging>war</packaging>
+  <version>5.0.1-SNAPSHOTS</version>
+  <name>hello Maven Webapp</name>
+  <url>http://maven.apache.org</url>
   <dependencies>
-  <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>applicationinsights-web</artifactId>
-        <!-- or applicationinsights-core for bare API -->
-        <version>[1.0,)</version>
-      </dependency>
     <dependency>
-        <groupId>com.sun.faces</groupId>
-        <artifactId>jsf-api</artifactId>
-        <version>2.2.14</version>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.3</version>
+      <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>com.sun.faces</groupId>
-        <artifactId>jsf-impl</artifactId>
-        <version>2.2.14</version>
-    </dependency>
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <version>3.1.0</version>
-    </dependency>
-  <dependency>
-      <groupId>redis.clients</groupId>
-      <artifactId>jedis</artifactId>
-      <version>2.9.0</version>
-      <type>jar</type>
-      <scope>compile</scope>
-  </dependency>
-</dependencies>
-  
-  <!-- Build Maven WAR -->
-<build>
-<finalName>ROOT</finalName>
+  </dependencies>
+  <build>
+    <finalName>myapp</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.2</version>
-        <configuration>
-          <!-- Java version -->
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals><goal>copy</goal></goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.github.jsimone</groupId>
+                  <artifactId>webapp-runner</artifactId>
+                  <version>8.5.11.3</version>
+                  <destFileName>webapp-runner.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
-    </plugins>   
+    </plugins>
   </build>
+ <distributionManagement>
+  <repository>
+    <id>releases</id>
+    <!-- nexus server details for release -->
+    <url>http://34.133.198.104:8081/repository/maven-releases/</url>
+  </repository>
+  <snapshotRepository>
+    <id>snapshots</id>
+    <!-- nexus server details for snapshots-->
+    <url>http://34.133.198.104:8081/repository/maven-snapshots/</url>
+  </snapshotRepository>
+</distributionManagement>
 </project>

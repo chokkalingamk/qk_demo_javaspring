@@ -1,18 +1,58 @@
-| Language | Framework | Platform | Author |
-| -------- | -------- |--------|--------|
-| Java | JSF | Azure Web App, Virtual Machine| |
+//added new line for test pull SCM
 
+//test multibranch
+# java-tomcat-maven-example
+#adding devops
+This is an example ready-to-deploy java web application built for Tomcat using Maven and webapp-runner.
 
-# JAVA web application
+## Running Locally
 
-Sample Java JSF web application that you can deploy to Azure.
+(need maven and java installed)
 
+```
+mvn package
+java -jar target/dependency/webapp-runner.jar target/*.war
+```
 
-## License:
+The application will be available on `http://localhost:8080`.
 
-See [LICENSE](LICENSE).
+## How This Was Built
 
-## Contributing
+1. Generate the project using a Maven archetype:
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+   ```
+   mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp
+   ```
 
+2. Add the webapp-runner plugin into the `pom.xml`:
+
+Test merge
+   ```
+   <build>
+     <!-- ... -->
+     <plugins>
+       <!-- ... -->
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-dependency-plugin</artifactId>
+         <version>2.3</version>
+         <executions>
+           <execution>
+             <phase>package</phase>
+             <goals><goal>copy</goal></goals>
+             <configuration>
+               <artifactItems>
+                 <artifactItem>
+                   <groupId>com.github.jsimone</groupId>
+                   <artifactId>webapp-runner</artifactId>
+                   <version>8.5.11.3</version>
+                   <destFileName>webapp-runner.jar</destFileName>
+                 </artifactItem>
+               </artifactItems>
+             </configuration>
+           </execution>
+         </executions>
+       </plugin>
+     </plugins>
+   </build>
+   ```
