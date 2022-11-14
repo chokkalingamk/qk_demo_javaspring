@@ -20,8 +20,8 @@ service:
 ingress:
   enabled: true
   namespace: default
-  annotations:
-    kubernetes.io/ingress.class: addon-http-application-routing
+  # annotations:
+  #   kubernetes.io/ingress.class: addon-http-application-routing
   path: /
   hostname: testjavaapp.techgigcloud.com
 
