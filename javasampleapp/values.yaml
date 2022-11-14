@@ -55,4 +55,4 @@ tolerations: []
 affinity: {}
 
 applicationInsights:
-  InstrumentationKey: InstrumentationKey=b660c341-82da-4957-ad91-589ffbf3481f;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/
+  InstrumentationKey: b660c341-82da-4957-ad91-589ffbf3481f
