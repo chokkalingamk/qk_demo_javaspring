@@ -106,7 +106,7 @@ jobs:
         cluster-name: ${{ env.CLUSTER_NAME }}
 
     - name: Lint Check
-      run: helm lint ./sampleapp
+      run: helm lint ./javasampleapp
     # - name: Lint Helm
     #   uses: WyriHaximus/github-action-helm3@v2
     #   with:
