@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/java/maven:8u192-zulu-debian9 AS build-env
+FROM maven:3.8.6-openjdk-8 AS build-env
 WORKDIR /app
 COPY . /app
 RUN mvn package
