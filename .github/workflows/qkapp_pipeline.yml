@@ -91,7 +91,7 @@ jobs:
 
     - name: Build and push image to ACR
       run: |
-          docker build . -t ${{ env.ACR_REGISTRY_URL }}/qkjavaappdemo:${{ github.sha }} -t ${{ env.ACR_REGISTRY_URL }}/qkappdemo:latest
+          docker build . -t ${{ env.ACR_REGISTRY_URL }}/qkjavaappdemo:${{ github.sha }} -t ${{ env.ACR_REGISTRY_URL }}/qkjavaappdemo:latest
           #docker push ${{ env.ACR_REGISTRY_URL }}/qkjavaappdemo:${{ github.sha }}
           docker push ${{ env.ACR_REGISTRY_URL }}/qkjavaappdemo --all-tags
 
