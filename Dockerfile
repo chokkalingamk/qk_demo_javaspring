@@ -1,7 +1,8 @@
-FROM openjdk:8-jdk-alpine
-ENV PORT 8080
-EXPOSE 8080
+FROM mcr.microsoft.com/java/maven:8u192-zulu-debian9 AS build-env
+WORKDIR /app
+COPY . /app
 RUN mvn package
-COPY target/*.jar /opt/app.jar
-WORKDIR /opt
-CMD ["java", "-jar", "app.jar"]
+ 
+FROM tomcat:8
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+COPY --from=build-env /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
