@@ -2,10 +2,11 @@
 {{- $fullName := include "sampleapp.fullname" . -}}
 {{- $serviceName := include "sampleapp.name" . -}}
 {{- $servicePort := .Values.service.port -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
+  namespace: {{ .Values.ingress.namespace | quote }}
   labels:
     app: {{ $serviceName }}
     release: {{ .Release.Name }}
@@ -15,6 +16,7 @@ metadata:
 {{ toYaml . | indent 4 }}
 {{- end }}
 spec:
+  ingressClassName: nginx
 {{- if .Values.ingress.tls }}
   tls:
   {{- range .Values.ingress.tls }}
@@ -31,6 +33,9 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }} 
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+            pathType: Prefix
 {{- end }}

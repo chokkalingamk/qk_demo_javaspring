@@ -1,28 +1,29 @@
 # Default values for sampleapp.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-fullnameOverride: sampleapp
-replicaCount: 2
+fullnameOverride: javasampleapp
+replicaCount: 1
 image:
-  repository: VALUE_TO_BE_OVERRIDDEN
+  repository: ecrinsights.azurecr.io/qkjavaappdemo
   tag: latest
 
-imagePullSecrets: []
+imagePullSecrets:
   # Optionally specify an array of imagePullSecrets.
   # Secrets must be manually created in the namespace.
   # ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
   #
   # This uses credentials from secret "myRegistryKeySecretName".
-  # - name: myRegistryKeySecretName
+  - name: qkjavaappdemo-secret
 service:
-  port: 8080
+  port: 8081
 
 ingress:
-  enabled: false
+  enabled: true
+  namespace: default
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
   path: /
-  hostname: VALUE_TO_BE_OVERRIDDEN
+  hostname: testjavaapp.techgigcloud.com
 
 secrets: {}
   # Optionally specify a set of secret objects whose values
@@ -54,4 +55,4 @@ tolerations: []
 affinity: {}
 
 applicationInsights:
-  InstrumentationKey: VALUE_TO_BE_OVERRIDDEN
+  InstrumentationKey: InstrumentationKey=b660c341-82da-4957-ad91-589ffbf3481f;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/
