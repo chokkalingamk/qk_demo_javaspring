@@ -145,7 +145,7 @@ jobs:
         action: deploy
         manifests: ${{ steps.bake.outputs.manifestsBundle }}
         images: |
-            ${{ env.ACR_REGISTRY_URL }}/qkappdemo:${{ github.sha }}
+            ${{ env.ACR_REGISTRY_URL }}/qkjavaappdemo:${{ github.sha }}
         imagepullsecrets: |
             qkjavaappdemo-secret
   # Deploy-Application:
